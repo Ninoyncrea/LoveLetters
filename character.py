@@ -8,11 +8,28 @@ class Character:
                              "princesse": 1}
         self.nbrole = sum(self.dictionnaire.values())
         self.nbtyperole = len(self.dictionnaire) - 1
+        self.valeur_carte = {"garde": 1, "pretre": 2, "Baron": 3, "servante": 4, "prince": 5, "roi": 6, "comtesse": 7,
+                             "princesse": 8}
 
-    def choix(self):
-        if len(self.dictionnaire)<=0:
-            print("fin de partie")
-            return self.role
+    def choix(self, dico):
+        if len(list(self.dictionnaire.keys())) == 0:
+            v = 0
+            print("la partie est finito")
+            gagnant = None
+            gagnant2 = None
+            print(dico)
+            for key, val in dico.items():
+                valeur = self.valeur_carte[val]
+                if valeur > v:
+                    v=valeur
+                    gagnant = key + " a gagné avec " + val
+                    gagnant2 = None
+                if valeur == v:
+                    gagnant2 = key + " a également gagné avec " + val
+            print(gagnant)
+            if gagnant2 != None:
+                print(gagnant2)
+            exit()
         n = rd.choice(list(self.dictionnaire.keys()))
         self.dictionnaire[n] -= 1
         print(self.dictionnaire)
@@ -24,5 +41,3 @@ class Character:
 
     def getnbrole(self):
         return self.nbrole
-
-

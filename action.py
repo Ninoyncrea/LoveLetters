@@ -44,9 +44,11 @@ class Action:
             if self.valeur_carte[self.role] < self.valeur_carte[self.dicoinfo[demandeutilisateur]]:
                 del self.dicoinfo[self.joueur]
                 print(self.joueur + " est éliminé")
+        if self.role == "v":
+            pass
         if self.role == "prince":
             demandeutilisateur = rd.choice(list(self.dicoinfo.keys()))
-            self.dicoinfo[demandeutilisateur] = self.partie.choix()
+            self.dicoinfo[demandeutilisateur] = self.partie.choix(self.dicoinfo)
         if self.role == "roi":
             # interface de choisir joueur
             demandeutilisateur = rd.choice(list(self.dicoinfo.keys()))

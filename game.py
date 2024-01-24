@@ -11,7 +11,7 @@ class Game:
 
     def initialisation(self):
         for i in range(self.nbjoueur):
-            self.dicoinfo["J" + str(i)] = self.partie.choix()
+            self.dicoinfo["J" + str(i)] = self.partie.choix(self.dicoinfo)
 
     def start(self):
         dicoinfoini = self.dicoinfo.copy()
@@ -24,7 +24,7 @@ class Game:
                 if nom not in list(self.dicoinfo.keys()):
                     continue
 
-                pioche = self.partie.choix()
+                pioche = self.partie.choix(self.dicoinfo)
                 # demander quel carte piocher
                 carte = role
                 if carte == pioche:
@@ -37,3 +37,7 @@ class Game:
                     print(self.dicoinfo)
                     exit()
         print("fin de partie")
+        if len(self.dicoinfo) == 1:
+            print("trop fort " +str(self.dicoinfo.keys) + " a gagné la partie")
+        if len(self.dicoinfo) == 0:
+            print("mentalité de perdant")
