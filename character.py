@@ -1,5 +1,6 @@
 import random as rd
 
+
 class character:
     def __init__(self):
         self.role = None
@@ -17,8 +18,10 @@ class character:
         print(self.dictionnaire)
         return self.role
 
+
 partie = character()
 
-J1role1 = partie.choix(), partie.choix()
-J2role1 = partie.choix(), partie.choix()
+J1role1 = partie.choix()
+J2role1 = partie.choix()
+
 print(J1role1)
