@@ -15,6 +15,7 @@ class Window(QWidget):
         self.dico = {"J0": "comptesse","J1":"roi","J2":"garde","J3":"baron"}
         self.pioche = "servante"
         self.nom_joueur = "J0"
+        self.nbre_joueurs = 3
 
     def action1(self):
         appareillage = {"garde":"1","prêtre":"2","baron":"3","servante":"4","prince":"5","roi":"6","comptesse":"7","princesse":"8"}
@@ -61,10 +62,6 @@ class Window(QWidget):
 
         self.grid.setColumnStretch(0, 1)
         self.grid.setColumnStretch(1, 1)
-
-
-
-
 
 
 if __name__ == '__main__':
