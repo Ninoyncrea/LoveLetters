@@ -18,6 +18,8 @@ class character:
         print(self.dictionnaire)
         return self.role
 
+    def getnbrole(self):
+        return self.nbrole
 
 partie = character()
 

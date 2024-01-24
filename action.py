@@ -9,9 +9,10 @@ class action:
         self.joueur = joueur
         self.valeur_carte = {"garde": 1, "pretre": 2, "Baron": 3, "servante": 4, "prince": 5, "roi": 6, "comtesse": 7,
                              "princesse": 8}
+
     def action1(self):
         if self.role == "garde":
-           """ cible = { #Faire interface ici qui fait les propositions de choix
+            """ cible = { #Faire interface ici qui fait les propositions de choix
                 'type': 'list',
                 'name': 'choix de cible',
                 'message': 'Sélectionnez un joueur',
@@ -25,18 +26,35 @@ class action:
                 'message': 'Sélectionnez un rôle',
                 'choices': [self.listejoueur],
             }"""
+            demandeutilisateur = ""
+            demanderole = ""
+            if demanderole == self.dicoinfo[demandeutilisateur]:
+                del self.dicoinfo[demandeutilisateur]
         if self.role == "pretre":
-             #interface choisir un joueur
+            # interface choisir un joueur
             demandeutilisateur = ""
             print(self.dicoinfo[demandeutilisateur])
         if self.role == "Baron":
-             #demander de choisir un joueur
+            # demander de choisir un joueur
             demandeutilisateur = ""
             if self.valeur_carte[self.joueur] > self.valeur_carte[demandeutilisateur]:
                 del self.dicoinfo[demandeutilisateur]
+                print(demandeutilisateur + " est éliminé")
+
             if self.valeur_carte[self.joueur] < self.valeur_carte[demandeutilisateur]:
                 del self.dicoinfo[self.joueur]
-        self.role = partie.choix()
-
-
-Act = action(["J1", "J2"], ["roi", "baron"], ["garde"])
+                print(self.joueur + " est éliminé")
+        if self.role == "prince":
+            # interface de choisir joueur
+            demandeutilisateur = ""
+            self.dicoinfo[demandeutilisateur] = partie.choix()
+        if self.role == "roi":
+            # interface de choisir joueur
+            demandeutilisateur = ""
+            self.dicoinfo[self.joueur] = self.dicoinfo[demandeutilisateur]
+            self.dicoinfo[self.joueur] = self.role
+        if self.role == "princesse":
+            del self.dicoinfo[self.joueur]
+        if len(self.dicoinfo) == 1:
+            print("la partie est fini")
+        return self.dicoinfo
