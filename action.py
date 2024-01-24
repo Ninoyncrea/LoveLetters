@@ -1,14 +1,14 @@
-from character import partie, J1role1, J2role1
-from PyInquirer import prompt
+import random as rd
 
 
-class action:
-    def __init__(self, dicoinfo, role, joueur):
+class Action:
+    def __init__(self, dicoinfo, role, joueur, partie):
         self.dicoinfo = dicoinfo
         self.role = role
         self.joueur = joueur
         self.valeur_carte = {"garde": 1, "pretre": 2, "Baron": 3, "servante": 4, "prince": 5, "roi": 6, "comtesse": 7,
                              "princesse": 8}
+        self.partie = partie
 
     def action1(self):
         if self.role == "garde":
@@ -26,35 +26,36 @@ class action:
                 'message': 'Sélectionnez un rôle',
                 'choices': [self.listejoueur],
             }"""
-            demandeutilisateur = ""
+            demandeutilisateur = rd.choice(list(self.dicoinfo.keys()))
             demanderole = ""
             if demanderole == self.dicoinfo[demandeutilisateur]:
                 del self.dicoinfo[demandeutilisateur]
         if self.role == "pretre":
             # interface choisir un joueur
-            demandeutilisateur = ""
+            demandeutilisateur = rd.choice(list(self.dicoinfo.keys()))
             print(self.dicoinfo[demandeutilisateur])
         if self.role == "Baron":
             # demander de choisir un joueur
-            demandeutilisateur = ""
-            if self.valeur_carte[self.joueur] > self.valeur_carte[demandeutilisateur]:
+            demandeutilisateur = rd.choice(list(self.dicoinfo.keys()))
+            if self.valeur_carte[self.role] > self.valeur_carte[self.dicoinfo[demandeutilisateur]]:
                 del self.dicoinfo[demandeutilisateur]
                 print(demandeutilisateur + " est éliminé")
 
-            if self.valeur_carte[self.joueur] < self.valeur_carte[demandeutilisateur]:
+            if self.valeur_carte[self.role] < self.valeur_carte[self.dicoinfo[demandeutilisateur]]:
                 del self.dicoinfo[self.joueur]
                 print(self.joueur + " est éliminé")
         if self.role == "prince":
-            # interface de choisir joueur
-            demandeutilisateur = ""
-            self.dicoinfo[demandeutilisateur] = partie.choix()
+            demandeutilisateur = rd.choice(list(self.dicoinfo.keys()))
+            self.dicoinfo[demandeutilisateur] = self.partie.choix()
         if self.role == "roi":
             # interface de choisir joueur
-            demandeutilisateur = ""
+            demandeutilisateur = rd.choice(list(self.dicoinfo.keys()))
             self.dicoinfo[self.joueur] = self.dicoinfo[demandeutilisateur]
             self.dicoinfo[self.joueur] = self.role
         if self.role == "princesse":
             del self.dicoinfo[self.joueur]
+            print(self.joueur)
         if len(self.dicoinfo) == 1:
             print("la partie est fini")
         return self.dicoinfo
+
