@@ -1,6 +1,6 @@
 from action import Action
 from character import Character
-
+from interface import Interface
 
 class Game:
     def __init__(self, nbjoueur):
@@ -21,23 +21,25 @@ class Game:
                 print(self.dicoinfo)
                 print(nom)
                 print(role)
-                if nom not in list(self.dicoinfo.keys()):
-                    continue
 
-                pioche = self.partie.choix(self.dicoinfo)
-                # demander quel carte piocher
-                carte = role
-                if carte == pioche:
-                    self.dicoinfo = self.act(self.dicoinfo, pioche, nom, self.partie).action1()
-                if carte == role:
-                    self.dicoinfo[nom] = pioche
-                    self.dicoinfo = self.act(self.dicoinfo, role, nom, self.partie).action1()
-                if self.partie.getnbrole() <= 0:
-                    print("fin de partie")
-                    print(self.dicoinfo)
-                    exit()
+                if nom in list(self.dicoinfo.keys()):
+
+                    pioche = self.partie.choix(self.dicoinfo)
+                    # demander quel carte piocher
+                    inter = Interface()
+                    inter.run(nom, pioche, self.dicoinfo)
+                    carte = inter.getchoix()
+                    if carte == pioche:
+                        self.dicoinfo = self.act(self.dicoinfo, pioche, nom, self.partie).action1()
+                    if carte == role:
+                        self.dicoinfo[nom] = pioche
+                        self.dicoinfo = self.act(self.dicoinfo, role, nom, self.partie).action1()
+
         print("fin de partie")
         if len(self.dicoinfo) == 1:
-            print("trop fort " +str(self.dicoinfo.keys) + " a gagné la partie")
+            print("trop fort " + str(self.dicoinfo.keys) + " a gagné la partie")
         if len(self.dicoinfo) == 0:
             print("mentalité de perdant")
+
+    def getdicoinfo(self):
+        return self.dicoinfo

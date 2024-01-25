@@ -1,5 +1,5 @@
 import random as rd
-
+from interface import Interface
 
 class Action:
     def __init__(self, dicoinfo, role, joueur, partie):
@@ -11,52 +11,43 @@ class Action:
         self.partie = partie
 
     def action1(self):
+        inter = Interface()
+
         if self.role == "garde":
-            """ cible = { #Faire interface ici qui fait les propositions de choix
-                'type': 'list',
-                'name': 'choix de cible',
-                'message': 'Sélectionnez un joueur',
-                'choices': self.listejoueur,
-            }
-            reponse = prompt(cible)
-            print(reponse["choix de cible"])
-            cible = {
-                'type': 'list',
-                'name': 'choix de cible',
-                'message': 'Sélectionnez un rôle',
-                'choices': [self.listejoueur],
-            }"""
-            demandeutilisateur = rd.choice(list(self.dicoinfo.keys()))
-            demanderole = ""
+            demandeutilisateur = inter.choix_joueur(self.dicoinfo)
+            valeur_cartesansgarde = self.valeur_carte.copy()
+            del valeur_cartesansgarde["garde"]
+            demanderole = inter.choix_joueur(valeur_cartesansgarde)
             if demanderole == self.dicoinfo[demandeutilisateur]:
                 del self.dicoinfo[demandeutilisateur]
+                inter.elimine(demandeutilisateur)
         if self.role == "pretre":
             # interface choisir un joueur
-            demandeutilisateur = rd.choice(list(self.dicoinfo.keys()))
+            demandeutilisateur = inter.choix_joueur(self.dicoinfo)
             print(self.dicoinfo[demandeutilisateur])
         if self.role == "Baron":
             # demander de choisir un joueur
-            demandeutilisateur = rd.choice(list(self.dicoinfo.keys()))
+            demandeutilisateur = inter.choix_joueur(self.dicoinfo)
             if self.valeur_carte[self.role] > self.valeur_carte[self.dicoinfo[demandeutilisateur]]:
                 del self.dicoinfo[demandeutilisateur]
-                print(demandeutilisateur + " est éliminé")
+                inter.elimine(demandeutilisateur)
 
             if self.valeur_carte[self.role] < self.valeur_carte[self.dicoinfo[demandeutilisateur]]:
                 del self.dicoinfo[self.joueur]
-                print(self.joueur + " est éliminé")
+                inter.elimine(self.joueur)
         if self.role == "v":
             pass
         if self.role == "prince":
-            demandeutilisateur = rd.choice(list(self.dicoinfo.keys()))
+            demandeutilisateur = inter.choix_joueur(self.dicoinfo)
             self.dicoinfo[demandeutilisateur] = self.partie.choix(self.dicoinfo)
         if self.role == "roi":
             # interface de choisir joueur
-            demandeutilisateur = rd.choice(list(self.dicoinfo.keys()))
+            demandeutilisateur = inter.choix_joueur(self.dicoinfo)
             self.dicoinfo[self.joueur] = self.dicoinfo[demandeutilisateur]
             self.dicoinfo[self.joueur] = self.role
         if self.role == "princesse":
             del self.dicoinfo[self.joueur]
-            print(self.joueur)
+            inter.elimine(self.joueur)
         if len(self.dicoinfo) == 1:
             print("la partie est fini")
         return self.dicoinfo

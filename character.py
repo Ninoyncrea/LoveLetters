@@ -21,10 +21,10 @@ class Character:
             for key, val in dico.items():
                 valeur = self.valeur_carte[val]
                 if valeur > v:
-                    v=valeur
+                    v = valeur
                     gagnant = key + " a gagné avec " + val
                     gagnant2 = None
-                if valeur == v:
+                elif valeur == v:
                     gagnant2 = key + " a également gagné avec " + val
             print(gagnant)
             if gagnant2 != None:
