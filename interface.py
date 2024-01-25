@@ -169,3 +169,13 @@ class Interface:
         # Attendre quelques secondes avant de fermer automatiquement la nouvelle fenêtre
         pygame.time.wait(3000)
         pygame.quit()
+
+    import pygame
+    import sys
+
+
+
+        # Quitter Pygame
+
+    # Exemple d'utilisation avec un dictionnaire de noms de joueurs
+
