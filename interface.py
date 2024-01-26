@@ -62,7 +62,7 @@ class Interface:
         button_spacing = 20
         button_margin_top = 50
         window = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
-        pygame.display.set_caption("fenêtre d'action de "+ nom)
+        pygame.display.set_caption("fenêtre d'action de " + nom)
 
         # Créer les boutons
         button1_rect = pygame.Rect(0, button_margin_top, button_width, button_height)
@@ -82,7 +82,7 @@ class Interface:
         button_window, button1, button2, label1, label2, label1_rect, label2_rect = self.create_buttons_window(role,
                                                                                                                dicoinfo[
                                                                                                                    nom],
-                                                                                                             nom)
+                                                                                                               nom)
         button_window.fill(self.WHITE)
         pygame.draw.rect(button_window, self.BLACK, button1)
         pygame.draw.rect(button_window, self.BLACK, button2)
@@ -159,7 +159,7 @@ class Interface:
         elimination_window.fill(self.WHITE)
         # Afficher le texte dans la nouvelle fenêtre
         font = pygame.font.Font(None, 24)
-        text_surface = font.render(irrevocable+ "est éliminé!", True, self.BLACK)
+        text_surface = font.render(irrevocable + "est éliminé!", True, self.BLACK)
         text_rect = text_surface.get_rect(center=(150, 100))
         elimination_window.blit(text_surface, text_rect)
 
@@ -170,12 +170,20 @@ class Interface:
         pygame.time.wait(3000)
         pygame.quit()
 
-    import pygame
-    import sys
+    def pretre(self, irrevocable, nom):
+        # Afficher une nouvelle fenêtre "Joueur 1 éliminé"
+        elimination_window = pygame.display.set_mode((300, 200))
+        pygame.display.set_caption("prêtre")
+        elimination_window.fill(self.WHITE)
+        # Afficher le texte dans la nouvelle fenêtre
+        font = pygame.font.Font(None, 24)
+        text_surface = font.render("le role de "+nom+" est : " + irrevocable, True, self.BLACK)
+        text_rect = text_surface.get_rect(center=(150, 100))
+        elimination_window.blit(text_surface, text_rect)
 
+        # Rafraîchir l'affichage de la nouvelle fenêtre
+        pygame.display.flip()
 
-
-        # Quitter Pygame
-
-    # Exemple d'utilisation avec un dictionnaire de noms de joueurs
-
+        # Attendre quelques secondes avant de fermer automatiquement la nouvelle fenêtre
+        pygame.time.wait(3000)
+        pygame.quit()

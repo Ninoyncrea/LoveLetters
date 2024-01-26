@@ -1,6 +1,8 @@
 from action import Action
 from character import Character
 from interface import Interface
+from fenetre import Fenetre
+
 
 class Game:
     def __init__(self, nbjoueur):
@@ -8,6 +10,7 @@ class Game:
         self.dicoinfo = {}
         self.partie = Character()
         self.act = Action
+        self.dictmort = None
 
     def initialisation(self):
         for i in range(self.nbjoueur):
@@ -18,6 +21,9 @@ class Game:
 
         while len(self.dicoinfo) > 1:
             for nom, role in dicoinfoini.items():
+                fenet = Fenetre()
+                print(self.act.getdicomort)
+                fenet.afficher_boutons_joueurs(self.dicoinfo, self.act.getdicomort)
                 print(self.dicoinfo)
                 print(nom)
                 print(role)
@@ -43,3 +49,4 @@ class Game:
 
     def getdicoinfo(self):
         return self.dicoinfo
+
