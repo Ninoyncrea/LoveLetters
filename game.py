@@ -10,7 +10,9 @@ class Game:
         self.dicoinfo = {}
         self.partie = Character()
         self.act = Action
-        self.dictmort = None
+        self.dictmort = {"admin": "admin"}
+        self.dicoactu = None
+        self.mort = None
 
     def initialisation(self):
         for i in range(self.nbjoueur):
@@ -22,8 +24,10 @@ class Game:
         while len(self.dicoinfo) > 1:
             for nom, role in dicoinfoini.items():
                 fenet = Fenetre()
-                print(self.act.getdicomort)
-                fenet.afficher_boutons_joueurs(self.dicoinfo, self.act.getdicomort)
+                self.dictmort = self.act(self.dicoinfo, role, nom, self.partie, self.dictmort).getdicomort()
+                if list(self.dictmort.values())[-1] != "admin":
+                    self.mort = list(self.dictmort.values())[-1]
+                fenet.afficher_boutons_joueurs(self.dicoinfo, self.dictmort)
                 print(self.dicoinfo)
                 print(nom)
                 print(role)
@@ -36,10 +40,15 @@ class Game:
                     inter.run(nom, pioche, self.dicoinfo)
                     carte = inter.getchoix()
                     if carte == pioche:
-                        self.dicoinfo = self.act(self.dicoinfo, pioche, nom, self.partie).action1()
+                        ACT = self.act(self.dicoinfo, pioche, nom, self.partie, self.dictmort)
+                        self.dicoinfo, self.dicoactu = ACT.action1()
                     if carte == role:
                         self.dicoinfo[nom] = pioche
-                        self.dicoinfo = self.act(self.dicoinfo, role, nom, self.partie).action1()
+                        ACT = self.act(self.dicoinfo, role, nom, self.partie, self.dictmort)
+                        self.dicoinfo, self.dicoactu = ACT.action1()
+
+                    self.dictmort.update(self.dicoactu)
+                    print(self.dictmort)
 
         print("fin de partie")
         if len(self.dicoinfo) == 1:
@@ -49,4 +58,3 @@ class Game:
 
     def getdicoinfo(self):
         return self.dicoinfo
-

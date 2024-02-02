@@ -7,7 +7,7 @@ class Fenetre:
         pygame.init()
         self.WHITE = (255, 255, 255)
 
-    def afficher_boutons_joueurs(self, noms_joueurs, dicomort):
+    def afficher_boutons_joueurs(self, noms_joueurs, dicomort, pioche=None):
         # Initialisation de Pygame
         print(dicomort)
         # Définir la taille de la fenêtre
@@ -35,22 +35,44 @@ class Fenetre:
         espacement_boutons = 20
         fenetre.fill(self.WHITE)
         for i, nom_joueur in noms_joueurs.items():
-            texte_explicatif = police.render(f"{i}", True, (0, 0, 0))
-            fenetre.blit(texte_explicatif, (x_bouton, y_bouton - 50))
-            # Obtenir les coordonnées de la souris
-            print(dicomort)
-            if dicomort != None:
-                if i in list(dicomort.keys()):
-                    fenetre.blit(dicomort[i] + ".jpg", (x_bouton, y_bouton))
-            if i not in list(dicomort.keys()):
+            if i != "admin":
+                print(i)
+                texte_explicatif = police.render(f"{i}", True, (0, 0, 0))
+                fenetre.blit(texte_explicatif, (x_bouton, y_bouton - 50))
+                # Obtenir les coordonnées de la souris
+
                 fenetre.blit(image_bouton, (x_bouton, y_bouton))
 
-            # Mettre à jour les coordonnées pour le prochain bouton
-            x_bouton += largeur_bouton + espacement_boutons
+                # Mettre à jour les coordonnées pour le prochain bouton
+                x_bouton += largeur_bouton + espacement_boutons
+        for i, nom_joueur in dicomort.items():
+            if i != "admin":
+                print(i)
+                texte_explicatif = police.render(f"{i}", True, (0, 0, 0))
+                fenetre.blit(texte_explicatif, (x_bouton, y_bouton - 50))
+                # Obtenir les coordonnées de la souris
+                fenetre.blit(dicomort[i] + ".jpg", (x_bouton, y_bouton))
+                # Mettre à jour les coordonnées pour le prochain bouton
+                x_bouton += largeur_bouton + espacement_boutons
 
+        if pioche != None:
+            print(pioche)
+            texte_explicatif = police.render("pioche", True, (0, 0, 0))
+            fenetre.blit(texte_explicatif, (x_bouton, y_bouton - 50))
+            # Obtenir les coordonnées de la souris
+
+            fenetre.blit(pioche + ".jpg", (x_bouton, y_bouton))
+        if pioche == None:
+            print(pioche)
+            texte_explicatif = police.render("pioche", True, (0, 0, 0))
+            fenetre.blit(texte_explicatif, (x_bouton, y_bouton - 50))
+            # Obtenir les coordonnées de la souris
+            fenetre.blit(image_bouton, (x_bouton, y_bouton))
         pygame.display.flip()
         running = True
         while running:
+            pygame.event.pump()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
+
