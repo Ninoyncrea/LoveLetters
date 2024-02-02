@@ -19,6 +19,7 @@ class Interface:
         # Police de texte
         self.font = pygame.font.Font(None, 36)
 
+
         # Nombre de joueurs
         self.num_players = 0
 
@@ -58,10 +59,14 @@ class Interface:
 
     def create_buttons_window(self, role, role2, nom):
         # Créer une nouvelle fenêtre avec deux boutons
-        button_width, button_height = 80, 108
-        button_spacing = 20
+        self.background = pygame.image.load("taverneV2.jpg")
+        # Redimensionne l'image pour s'adapter à la taille de l'écran
+        self.background = pygame.transform.scale(self.background, (self.WIDTH, self.HEIGHT))
+        self.screen.blit(self.background, (0, 0))
+        button_width, button_height = 174, 174
+        button_spacing = 55
         button_margin_top = 50
-        self.WIDTH, self.HEIGHT = 600, 300
+        self.WIDTH, self.HEIGHT = 700, 350
 
         window = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
         pygame.display.set_caption("fenêtre d'action de " + nom)
@@ -77,6 +82,7 @@ class Interface:
         label1_rect = label1.get_rect(center=(button1_rect.centerx, button1_rect.top - 15))
         label2_rect = label2.get_rect(center=(button2_rect.centerx, button2_rect.top - 15))
         return window, button1_rect, button2_rect, label1, label2, label1_rect, label2_rect
+
 
     def run(self, nom, role, dicoinfo):
         # Appeler la fonction pour demander le nombre de joueurs
@@ -98,7 +104,7 @@ class Interface:
         button_window.blit(button1_image, button1)
         button_window.blit(button2_image, button2)
         button_image = pygame.image.load("regle1.jpg")
-        button_rect = button_image.get_rect(topleft=(300, 0))
+        button_rect = button_image.get_rect(topleft=(430, 0))
         # Rafraîchir l'affichage de la fenêtre avec les boutons et l'image
         button_window.blit(button_image, button_rect)
         # Rafraîchir l'affichage de la fenêtre avec les boutons
