@@ -14,6 +14,7 @@ class Action:
 
     def action1(self):
         inter = Interface()
+        defausse = None
         if self.role == "garde":
             demandeutilisateur = inter.choix_joueur(self.dicoinfo)
             valeur_cartesansgarde = self.valeur_carte.copy()
@@ -35,7 +36,7 @@ class Action:
                 self.dicomort[demandeutilisateur] = self.dicoinfo[demandeutilisateur]
                 del self.dicoinfo[demandeutilisateur]
                 inter.elimine(demandeutilisateur)
-            if self.valeur_carte[self.dicoinfo[demandeutilisateur]] is not None:
+            elif self.valeur_carte[self.dicoinfo[demandeutilisateur]] is not None:
                 if self.valeur_carte[self.role] < self.valeur_carte[self.dicoinfo[demandeutilisateur]]:
                     self.dicomort[self.joueur] = self.dicoinfo[self.joueur]
                     del self.dicoinfo[self.joueur]
@@ -44,6 +45,7 @@ class Action:
             pass
         if self.role == "prince":
             demandeutilisateur = inter.choix_joueur(self.dicoinfo)
+            defausse = self.dicoinfo[demandeutilisateur]
             self.dicoinfo[demandeutilisateur] = self.partie.choix(self.dicoinfo)
         if self.role == "roi":
             # interface de choisir joueur
@@ -56,7 +58,7 @@ class Action:
             inter.elimine(self.joueur)
         if len(self.dicoinfo) == 1:
             print("la partie est fini")
-        return self.dicoinfo, self.dicomort
+        return self.dicoinfo, self.dicomort, defausse
 
     def getdicomort(self):
         return self.dicomort

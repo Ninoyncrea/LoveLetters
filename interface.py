@@ -58,9 +58,11 @@ class Interface:
 
     def create_buttons_window(self, role, role2, nom):
         # Créer une nouvelle fenêtre avec deux boutons
-        button_width, button_height = 100, 50
+        button_width, button_height = 80, 108
         button_spacing = 20
         button_margin_top = 50
+        self.WIDTH, self.HEIGHT = 600, 300
+
         window = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
         pygame.display.set_caption("fenêtre d'action de " + nom)
 
@@ -91,6 +93,14 @@ class Interface:
         pygame.draw.rect(button_window, self.BLACK, button2)
         button_window.blit(label1, label1_rect)
         button_window.blit(label2, label2_rect)
+        button1_image = pygame.image.load(role + ".jpg")
+        button2_image = pygame.image.load(dicoinfo[nom] + ".jpg")
+        button_window.blit(button1_image, button1)
+        button_window.blit(button2_image, button2)
+        button_image = pygame.image.load("regle1.jpg")
+        button_rect = button_image.get_rect(topleft=(300, 0))
+        # Rafraîchir l'affichage de la fenêtre avec les boutons et l'image
+        button_window.blit(button_image, button_rect)
         # Rafraîchir l'affichage de la fenêtre avec les boutons
         pygame.display.flip()
         # Boucle principale pour la fenêtre avec les boutons
@@ -177,7 +187,7 @@ class Interface:
         elimination_window.fill(self.WHITE)
         # Afficher le texte dans la nouvelle fenêtre
         font = pygame.font.Font(None, 24)
-        text_surface = font.render("le role de "+nom+" est : " + irrevocable, True, self.BLACK)
+        text_surface = font.render("le role de " + nom + " est : " + irrevocable, True, self.BLACK)
         text_rect = text_surface.get_rect(center=(150, 100))
         elimination_window.blit(text_surface, text_rect)
 

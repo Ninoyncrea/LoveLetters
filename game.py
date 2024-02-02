@@ -27,7 +27,7 @@ class Game:
                 self.dictmort = self.act(self.dicoinfo, role, nom, self.partie, self.dictmort).getdicomort()
                 if list(self.dictmort.values())[-1] != "admin":
                     self.mort = list(self.dictmort.values())[-1]
-                fenet.afficher_boutons_joueurs(self.dicoinfo, self.dictmort)
+                fenet.afficher_boutons_joueurs(self.dicoinfo, self.dictmort, nom =nom)
                 print(self.dicoinfo)
                 print(nom)
                 print(role)
@@ -52,7 +52,9 @@ class Game:
 
         print("fin de partie")
         if len(self.dicoinfo) == 1:
-            print("trop fort " + str(self.dicoinfo.keys) + " a gagné la partie")
+            print("trop fort " + str(self.dicoinfo.keys()) + " a gagné la partie")
+            fenet = Fenetre()
+            fenet.affichevainqueur(str(self.dicoinfo.keys()))
         if len(self.dicoinfo) == 0:
             print("mentalité de perdant")
 
