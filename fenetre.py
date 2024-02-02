@@ -64,7 +64,7 @@ class Fenetre:
             fenetre.blit(texte_explicatif, (x_bouton, y_bouton - 150))
             # Obtenir les coordonnées de la souris
             image = pygame.image.load(pioche + ".jpg")
-            fenetre.blit(image + ".jpg", (x_bouton, y_bouton))
+            fenetre.blit(image, (x_bouton, y_bouton))
         if pioche == None:
             print(pioche)
             texte_explicatif = police.render("défausse", True, (0, 0, 0))
