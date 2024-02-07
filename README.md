@@ -34,6 +34,25 @@ Les valeurs et pouvoirs sont associés aux rôles comme suit :
 
 ## Comment jouer à la version numérique : 
 
+On précise que cette version n'est malheuresment disponible que pour exactement 4 joueurs.
+Une fois la partie lancée et que les clients sont présents, l'état de la table s'affiche pour chaque client :  
+
+
+
+Ils ont donc accès à leur(s) cartes mais pas à celles des autres. Lorsqu'un joueur joue une carte avec un pouvoir faisant intervenir les autres joueurs et (éventuellement) les rôles de ces derniers, il doit cliquer (sans ordre précis) sur le joueur ciblé et (si nécessaire) sur le rôle qu'il choisit parmis les rôles affichés en bas de l'écran.
+Une fois un joueur éliminé, une carte spéciale s'affiche sur son emplacement  : 
+
+
+Non n'avons malheuresement pas réussi à incorporer les conditions de victoires, et c'est aux participants de constater que la partie est finie lorsqu'un joueur seulement n'a pas la carte ci-dessus affichée sur son emplacement.
+
+
+
+
+
+
+
+
+
 Après avoir choisi à combien de joueurs jouer, un écran récapitulatif s'affiche afin de garder le fil de qui est éliminé et avec quelle carte  : 
 
 #A METTRE A JOUR
