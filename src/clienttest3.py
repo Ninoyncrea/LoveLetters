@@ -149,7 +149,7 @@ class ClientJeu:
 
 # Utilisation de la classe ClientJeu
 if __name__ == "__main__":
-    SERVER_HOST = '127.0.0.1'
+    SERVER_HOST = open("src/Master_ip.txt", "r").read().strip()
     SERVER_PORT = 5555
     client_jeu = ClientJeu(SERVER_HOST, SERVER_PORT)
     client_jeu.run()
